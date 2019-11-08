@@ -88,7 +88,7 @@ class Quinoa inherits Planta {
 	}
 	
 	override method parcelaIdeal(parcela){
-		return parcela.plantas().all({p=> p.altura < 1.5})
+		return parcela.plantas().all({p=> p.altura() < 1.5 })
 	}
 }
 
