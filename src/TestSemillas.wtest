@@ -1,4 +1,5 @@
 import semillas.*
+import parcelas.*
 
 test "menta" {
 
@@ -16,13 +17,13 @@ test "menta" {
 test "soja" {
 	
 	var soja1 = new Soja (altura = 0.6 , anioDeObtencion = 2009)
-	var soja2 = new Soja (altura = 1 , anioDeObtencion = 2006)
+	var soja2 = new Soja (altura = 1 , anioDeObtencion = 2008)
 	
 	assert.notThat(soja1.daSemillas())
 	assert.equals(7, soja1.cuantasHorasSolTolera())
 	assert.equals(0.3,soja1.espacioQueOcupa())
 	
-	assert.notThat(soja2.daSemillas())
+	assert.that(soja2.daSemillas())
 	assert.equals(7, soja2.cuantasHorasSolTolera())
 	assert.equals(0.5,soja2.espacioQueOcupa())
 }
@@ -36,5 +37,46 @@ test "quinoa" {
 	
 	assert.that(quinoa2.daSemillas())
 }
+
+test "soja transgenica" {
+	
+	var soja1 = new SojaTransgenica (altura = 0.6 , anioDeObtencion = 2009)
+	var soja2 = new SojaTransgenica (altura = 1 , anioDeObtencion = 2008)
+	
+	assert.notThat(soja1.daSemillas())
+	assert.equals(7, soja1.cuantasHorasSolTolera())
+	assert.equals(0.3,soja1.espacioQueOcupa())
+	
+	assert.notThat(soja2.daSemillas())
+	assert.equals(7, soja2.cuantasHorasSolTolera())
+	assert.equals(0.5,soja2.espacioQueOcupa())
+}
+
+test "hiedra buena" {
+	
+	var menta1 = new HiedraBuena (altura = 1)
+	var menta2 = new HiedraBuena (altura = 0.3)
+	
+	assert.that(menta1.daSemillas())
+	assert.equals(6,menta1.espacioQueOcupa())
+	
+	assert.notThat(menta2.daSemillas())
+	assert.equals(1.8,menta2.espacioQueOcupa())
+}
+
+test "parcela" {
+	var parcela1 = new Parcela (largo = 1, ancho = 20, horasDeSol = 8)
+	
+	assert.equals(20, parcela1.superficie())
+	assert.equals(4, parcela1.cantidadMaxDePlantas())
+	
+	parcela1.plantarUnaPlanta(new Soja (altura = 1 , anioDeObtencion = 2009))
+	parcela1.plantarUnaPlanta(new Soja (altura = 1.1 , anioDeObtencion = 2008))
+	parcela1.plantarUnaPlanta(new Soja (altura = 1.3 , anioDeObtencion = 2007))
+	parcela1.plantarUnaPlanta(new Soja (altura = 1.5 , anioDeObtencion = 2006))
+	
+	//parcela1.plantarUnaPlanta(new Soja (altura = 1.6 , anioDeObtencion = 2005))
+}
+
 
 
